@@ -1,0 +1,21 @@
+{
+  "name": "explore-socket.io",
+  "version": "1.0.0",
+  "description": "my first scoket.io app",
+  "license": "ISC",
+  "author": "Rayhanul Islam",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

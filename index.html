@@ -66,10 +66,14 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
+      let counter = 0;
+
       const socket = io({
         auth: {
           serverOffset: 0,
         },
+        ackTimeout: 1000 * 10,
+        retries: 3,
       });
 
       const form = document.getElementById("form");
@@ -81,7 +85,8 @@
         event.preventDefault();
 
         if (input.value) {
-          socket.emit("chat message", input.value);
+          const clientOffset = `${socket.id}-${counter++}`;
+          socket.emit("chat message", input.value, clientOffset);
           input.value = "";
         }
       });
@@ -90,9 +95,15 @@
         if (socket.connected) {
           toggleButton.innerText = "Connect";
           socket.disconnect();
+          const item = document.createElement("li");
+          item.textContent = "disconnected!!!";
+          messages.appendChild(item);
         } else {
           toggleButton.innerText = "Disconnect";
           socket.connect();
+          const item = document.createElement("li");
+          item.textContent = "connected!!!";
+          messages.appendChild(item);
         }
       });
 
